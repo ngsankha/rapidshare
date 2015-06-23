@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :userfiles
   end
+
+  resources :admin
 end

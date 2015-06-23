@@ -21,11 +21,13 @@
       <a class="navbar-brand" href="/">RapidShare</a>
     </div>
     <div class="collapse navbar-collapse">
-      <!--
+      <% if current_user.try(:admin?) %>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/ideas">Blah!</a></li>
+        <li <% if current_page?(:controller => 'admin', :action => 'index') %>
+        class="active"
+        <% end %>><a href="/admin">Admin Panel</a></li>
       </ul>
-      -->
+      <% end %>
       <p class="navbar-text pull-right">
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.

@@ -13,9 +13,9 @@ class UserfilesController < ApplicationController
   end
 
   def destroy
-    @userfile = current_user.userfiles.find(params[:id])
+    @userfile = Userfile.find(params[:id])
     @userfile.destroy
-    redirect_to(root_path, :notice => "File deleted!")
+    redirect_to(request.referer, :notice => "File deleted!")
   end
 
   private

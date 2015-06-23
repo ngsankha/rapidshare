@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-5">
+    <h2>Users</h2>
+    <table class="table table-hover">
+    <% User.all.each do |u| %>
+      <tr>
+        <td><%= u.email %></td>
+        <td><% unless u == current_user %>
+        <% if u.admin? %>
+        <%= link_to 'Remove admin', admin_path(u),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %>
+        <% else %>
+        <%= link_to 'Make admin', admin_path(u),
+          method: :patch,
+          data: { confirm: 'Are you sure?' } %>
+        <% end %><% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-6">
+    <h2>Available Files</h2>
+    <table class="table table-hover">
+    <% Userfile.all.each do |f| %>
+      <tr>
+        <td><%= f.blob_identifier %></td>
+        <td><%= f.user.email %></td>
+        <td><%= link_to 'Delete', [f.user, f],
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
