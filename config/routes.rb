@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
 
   resources :admin
+  match '/users/edit',:via => 'GET', :to => 'devise/admin#index'
 end
