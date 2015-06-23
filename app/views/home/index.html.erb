@@ -1,1 +1,25 @@
-<h1>Rapidshare</h1>
+<div class="row">
+  <div class="col-md-5">
+    <h2>Upload a file</h2>
+    <%= form_for([@user, @user.userfiles.build]) do |f| %>
+      <%= f.file_field :blob %>
+      <%= f.submit 'Upload File', :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-5">
+    <h2>Uploaded files</h2>
+    <table class="table table-hover">
+    <% @user.userfiles.each do |f| %>
+      <% unless f == @user.userfiles.last %>
+      <tr>
+        <td><a href="<%= f.blob.url %>"><%= f.blob_identifier %></a></td>
+        <td><%= link_to 'Delete', [f.user, f],
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    </table>
+  </div>
+</div>
